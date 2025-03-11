@@ -46,12 +46,12 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
           script: |
-            cd ~/drf_scaffold/backend
+            cd ~/haruhanjul/backend
             git pull origin ${{ github.ref_name }}
             pip install -r requirements.txt
             python manage.py makemigrations
             python manage.py migrate
-            sudo systemctl restart drf-scaffold-api
+            sudo systemctl restart haruhanjul-api
 
       - name: Remove Github Actions IP from security group
         if: always()
