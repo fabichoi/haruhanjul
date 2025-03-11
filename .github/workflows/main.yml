@@ -47,9 +47,9 @@ jobs:
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
           script: |
             cd ~/haruhanjul/backend
-            source ./venv/bin/activate
+            source ../venv/bin/activate
             git pull origin ${{ github.ref_name }}
-            pip install -r requirements.txt
+            pip install -r ../requirements.txt
             python manage.py makemigrations
             python manage.py migrate
             sudo systemctl restart haruhanjul-api
