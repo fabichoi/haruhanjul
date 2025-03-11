@@ -175,6 +175,7 @@ sentry_sdk.init(
         DjangoIntegration(),
         LoggingIntegration(level="ERROR", event_level="ERROR")
     ],
+    environment=config('SENTRY_ENV'),
     traces_sample_rate=1.0,
     send_default_pii=True
 )
