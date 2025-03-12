@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 import sentry_sdk
@@ -46,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'base.middlewares.BlockIPMiddleware',
 ]
 
 REST_FRAMEWORK = {
@@ -179,3 +181,5 @@ sentry_sdk.init(
     traces_sample_rate=1.0,
     send_default_pii=True
 )
+
+GEOIP_PATH = "./etc/geolite2"
