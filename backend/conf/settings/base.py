@@ -26,13 +26,14 @@ DJANGO_APPS = [
 
 PROJECT_APPS = [
     'apps.users',
-
+    'apps.quotes',
 ]
 
 THIRD_PARTY_APPS = [
     'rest_framework',
     'oauth2_provider',
     'drf_spectacular',
+    'django_extensions',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
