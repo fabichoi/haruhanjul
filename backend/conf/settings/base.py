@@ -30,6 +30,7 @@ PROJECT_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    'corsheaders',
     'rest_framework',
     'oauth2_provider',
     'drf_spectacular',
@@ -67,6 +68,8 @@ REST_FRAMEWORK = {
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+CORS_ALLOWED_ORIGINS = ["*"]
 
 CUSTOM_HEADER_NAME = "HTTP_X_SERVICE_TOKEN"
 
