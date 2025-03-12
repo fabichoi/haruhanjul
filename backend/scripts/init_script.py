@@ -10,7 +10,7 @@ def import_quotes():
     if Quote.objects.last():
         return
 
-    file_path = os.path.join(settings.BASE_DIR, "init_quote.json")
+    file_path = os.path.join(settings.BASE_DIR.parent, "scripts/init_quote.json")
 
     with open(file_path, "r", encoding="utf-8") as file:
         quotes = json.load(file)

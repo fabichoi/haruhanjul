@@ -1,5 +1,8 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
+User = get_user_model()
 
 
 class CreatedTimeStampModel(models.Model):
@@ -25,22 +28,22 @@ class TimeStampModel(models.Model):
 
 
 class CreatedAuditModel(models.Model):
-    created_user = models.ForeignKey("User", on_delete=models.SET_NULL, null=True, verbose_name=_("created_user"))
+    created_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name=_("created_user"))
 
     class Meta:
         abstract = True
 
 
 class UpdatedAuditModel(models.Model):
-    updated_user = models.ForeignKey("User", on_delete=models.SET_NULL, null=True, verbose_name=_("updated_user"))
+    updated_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name=_("updated_user"))
 
     class Meta:
         abstract = True
 
 
 class AuditModel(models.Model):
-    created_user = models.ForeignKey("User", on_delete=models.SET_NULL, null=True, verbose_name=_("created_user"))
-    updated_user = models.ForeignKey("User", on_delete=models.SET_NULL, null=True, verbose_name=_("updated_user"))
+    created_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name=_("created_user"))
+    updated_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name=_("updated_user"))
 
     class Meta:
         abstract = True

@@ -52,6 +52,7 @@ jobs:
             pip install -r ../requirements.txt
             python manage.py makemigrations
             python manage.py migrate
+            python manage.py runscript init_script
             sudo systemctl restart haruhanjul-api
 
       - name: Remove Github Actions IP from security group
