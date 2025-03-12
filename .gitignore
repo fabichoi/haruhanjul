@@ -136,3 +136,4 @@ $RECYCLE.BIN/
 *.msp
 *.lnk
 config.toml
+init_quote.json
