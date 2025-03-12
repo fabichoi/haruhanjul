@@ -69,7 +69,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-CORS_ALLOWED_ORIGINS = ["*"]
+CORS_ALLOW_ALL_ORIGINS = True
 
 CUSTOM_HEADER_NAME = "HTTP_X_SERVICE_TOKEN"
 
