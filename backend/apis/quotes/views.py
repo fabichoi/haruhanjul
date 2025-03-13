@@ -18,6 +18,7 @@ class QuoteViewSet(
 ):
     serializer_class = QuoteSerializer
     permission_classes = [AllowAny, ]
+    authentication_classes = []
 
     def list(self, request, *args, **kwargs):
         min_id, max_id = Quote.objects.aggregate(Min('id'), Max('id')).values()
