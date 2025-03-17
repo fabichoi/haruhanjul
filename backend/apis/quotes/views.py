@@ -2,10 +2,12 @@ import random
 
 from django.db.models import Min, Max
 from rest_framework import mixins
+from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
+from apis.exceptions import ApiValidationError
 from apis.quotes.serializers import QuoteSerializer
 from apps.quotes.models import Quote
 from base.mixins import SentryLoggingMixin
@@ -36,3 +38,17 @@ class QuoteViewSet(
             idx += 1
 
         return Response(data={})
+
+    @action(methods=["POST"], detail=True)
+    def like(self, request, pk=None):
+        if not pk:
+            raise ApiValidationError()
+
+        quote = Quote.objects.filter(id=pk).last()
+
+        if not quote:
+            raise ApiValidationError()
+
+        quote.like_count += 1
+        quote.save()
+        return Response({"like_count": quote.like_count})
