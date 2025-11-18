@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 import sentry_sdk
@@ -25,13 +26,15 @@ DJANGO_APPS = [
 
 PROJECT_APPS = [
     'apps.users',
-
+    'apps.quotes',
 ]
 
 THIRD_PARTY_APPS = [
+    'corsheaders',
     'rest_framework',
     'oauth2_provider',
     'drf_spectacular',
+    'django_extensions',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
@@ -46,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'base.middlewares.BlockIPMiddleware',
 ]
 
 REST_FRAMEWORK = {
@@ -64,6 +68,8 @@ REST_FRAMEWORK = {
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 CUSTOM_HEADER_NAME = "HTTP_X_SERVICE_TOKEN"
 
@@ -99,7 +105,7 @@ SPECTACULAR_SETTINGS = {
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -175,6 +181,9 @@ sentry_sdk.init(
         DjangoIntegration(),
         LoggingIntegration(level="ERROR", event_level="ERROR")
     ],
+    environment=config('SENTRY_ENV'),
     traces_sample_rate=1.0,
     send_default_pii=True
 )
+
+GEOIP_PATH = "./etc/geolite2"
